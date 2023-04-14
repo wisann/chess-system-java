@@ -1,11 +1,27 @@
 
 package aplication;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
 
+	public static ChessPosition readChessPosition(Scanner sc) {
+		try {
+			String s = sc.nextLine();
+			char column = s.charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new ChessPosition(column, row);
+		}
+		catch (RuntimeException e) {
+			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8.");
+		}
+	
+	}
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_RED = "\u001B[31m";
